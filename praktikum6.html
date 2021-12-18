@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PT. Once Sejahteras</title>
+  <link rel="icon" type="image/gif/png" href="logo.jpg">
+  <link rel="stylesheet" href="style.css">
+  <!--<link rel="stylesheet" href="praktikum6.js">-->
+</head>
+<body>
+  <div class="bag 1">
+    <h1>TAGIHAN LISTRIK</h1>
+    <table style="width:30%">
+      <tr>
+        <td>Nama Pelanggan</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>Kategori</td>
+        <td>
+          <select id="kategori">
+            <option>Pilih Kategori Peminjaman</option>
+
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Jumlah Pemakaian</td>
+        <td><input type="number" id="inputJumlah"></td>
+      </tr>
+    </table>
+    <div class="hitung">
+      <button onclick="hitungTagihan()">Hitung</button>
+    </div>
+  <div class="bag2">
+    <h2 id="subJudul"></h2>
+    <table id="table-2">
+      <tr id="tab"></tr>
+      <tr id="rincianTagihan">
+        <td id="rincianJumlah"></td>
+        <td id="rincianTarif"></td>
+        <td id="rincianAbondemen"></td>
+        <td id="rincianTotal"></td>
+      </tr>
+    </table>
+  </div>
+  <div class="bag-3">
+    <p id="subtotal"></p>
+    <p id="pajak"></p>
+    <p id="bayar"></p>
+  </div>
+  </div>
+</body>
+<script type="text/javascript">
+  let kategori = document.getElementById("kategori")
+
+  const dataKategori = ['Sosial','Rumah','Apartemen','Industri','Villa'];
+  
+  for(i = 0; i < dataKategori.length; i++){
+        result = "<option value=" + i + ">" + dataKategori[i] + "</option>"
+        kategori.innerHTML += result
+      }
+
+  function hitungTagihan(){
+    let judulTab = document.getElementById("tab")
+    let arrTab = ["Judul","Tarif per-KWH","Abondemen","Sub Total"];
+
+    for(i = 0; i < arrTab.length; i++){
+        result = "<td value=" + i + ">" + arrTab[i] + "</td>"
+        judulTab.innerHTML += result
+        
+      }
+    
+    document.getElementById("subJudul").innerHTML = "Rincian Tagihan";
+    
+    let num = document.getElementById("inputJumlah").value;
+    let inputKategori = document.getElementById("kategori").value;
+    let rincianTagihan = document.getElementById("rincianTagihan");
+    let rincianJumlah = document.getElementById("rincianJumlah");
+    let rincianTarif = document.getElementById("rincianTarif");
+    let rincianAbondemen = document.getElementById("rincianAbondemen");
+    let rincianTotal = document.getElementById("rincianTotal");
+
+    const dataAbondemen = [10000,30000,50000,75000,100000];
+    const dataTarifPerKWH = [300,500,750,1000,1250];
+    const dataPajak =[0,0.10,0.15,0.20,0.25];
+    var trf, abndmn, ttl;
+
+    console.log(dataTarifPerKWH[0]);
+
+      for (var x=1, x; x<=num; x++){
+        for (var y=0, y; y<x; y++){
+          if(inputKategori=="Sosial"){
+            trf[x] += dataTarifPerKWH[0];
+            abndmn[x] += dataAbondemen[0];
+            subtot[x] = dataTarifPerKWH[0] + dataAbondemen[0];
+            var pajak = subtot[x] * dataPajak[0];
+            ttl[x] += (subtot[x]+(subtot[x]*dataPajak[0]));
+          } else if (inputKategori=="Rumah"){
+            trf[x] += dataTarifPerKWH[1];
+            abndmn[x] += dataAbondemen[1];
+            subtot[x] = dataTarifPerKWH[1] + dataAbondemen[1];
+            var pajak = subtot[x] * dataPajak[1];
+            ttl[x] += (subtot[x]+(subtot[x]*dataPajak[1]));
+          } else if (inputKategori=="Apartemen"){
+            trf[x] += dataTarifPerKWH[2];
+            abndmn[x] += dataAbondemen[2];
+            subtot[x] = dataTarifPerKWH[2] + dataAbondemen[2];
+            var pajak = subtot[x] * dataPajak[2];
+            ttl[x] += (subtot[x]+(subtot[x]*dataPajak[2]));
+          } else if (inputKategori=="Industri"){
+            trf[x] += dataTarifPerKWH[3];
+            abndmn[x] += dataAbondemen[3];
+            subtot[x] = dataTarifPerKWH[3] + dataAbondemen[3];
+            var pajak = subtot[x] * dataPajak[3];
+            ttl[x] += (subtot[x]+(subtot[x]*dataPajak[3]));
+          } else if (inputKategori=="Villa"){
+            trf[x] += dataTarifPerKWH[4];
+            abndmn[x] += dataAbondemen[4];
+            subtot[x] = dataTarifPerKWH[4] + dataAbondemen[4];
+            var pajak = subtot[x] * dataPajak[4];
+            ttl[x] += (subtot[x]+(subtot[x]*dataPajak[4]));
+          }
+          
+        }
+        rincianJumlah.innerHTML += x;
+        rincianTarif.innerHTML += trf;
+        rincianAbondemen.innerHTML += abndmn;
+        rincianTotal.innerHTML += ttl;
+      }
+
+    let subtotal = document.getElementById("subtotal");
+    let totalPajak = document.getElementById("pajak");
+    let totalBayar = document.getElementById("bayar");
+    
+    subtotal.innerHTML = rincianTotal;
+    totalPajak.innerHTML = pajak;
+    totalBayar.innerHTML = rincianTotal;
+  }
+  
+</script>
+</html>
